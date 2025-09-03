@@ -262,8 +262,9 @@ The main values are: in colors.xml
 ```
     <!-- A hex color value to be displayed on the top part of the custom incoming call UI --> 
     <color name="incoming_call_bg_color">#80ffffff</color>
+```
 in strings.xml
-
+```
     <!-- Accept button call text, useful for localization --> 
     <string name="accept_text">Accept</string>
     <!-- Decline button call text, useful for localization --> 
