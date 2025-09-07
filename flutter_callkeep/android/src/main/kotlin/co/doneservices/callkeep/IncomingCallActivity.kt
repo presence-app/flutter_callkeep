@@ -129,10 +129,12 @@ class IncomingCallActivity : Activity() {
         val data = intent.extras?.getBundle(EXTRA_CALLKEEP_INCOMING_DATA)
         if (data == null) finish()
 
+        // Set CallerName (eg John Doe) and CallHeader (eg, Incoming Call)
+        // from EXTRA_CALLKEEP_CALLER_NAME and EXTRA_CALLKEEP_CONTENT_TITLE
         tvCallerName.text = data?.getString(EXTRA_CALLKEEP_CALLER_NAME, "")
         tvCallHeader.text = data?.getString(EXTRA_CALLKEEP_CONTENT_TITLE, "")
 
-        // Display avatarUrl
+        // Set avatarUrl from EXTRA_CALLKEEP_AVATAR
         val avatarUrl = data?.getString(EXTRA_CALLKEEP_AVATAR)
         val avatarDrawable = if (!avatarUrl.isNullOrEmpty()) {
             avatarUrl
@@ -151,9 +153,10 @@ class IncomingCallActivity : Activity() {
         val duration = data?.getLong(EXTRA_CALLKEEP_DURATION, 0L) ?: 0L
         wakeLockRequest(duration)
         finishTimeout(data, duration)
-        applyGradientBackground()
+        applyGradientBackground() // Apply background gradient color
     }
 
+    // Set background gradient blue color
     private fun applyGradientBackground() {
         val colors = intArrayOf(Color.parseColor("#456D91"), Color.parseColor("#2A5379"))
         val gradient = android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colors)
