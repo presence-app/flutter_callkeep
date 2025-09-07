@@ -1,75 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/incoming_call_bg_color">
 
+    <!-- Caller Info -->
     <LinearLayout
         android:id="@+id/llBackground"
-        android:paddingBottom="50dp"
-        android:background="@color/incoming_call_bg_color"
         android:orientation="vertical"
+        android:gravity="top|center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:paddingTop="150dp"
+        android:paddingBottom="100dp">
+
+        <!-- Avatar image (EXTRA_CALLKEEP_AVATAR) -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_logo"
+            android:visibility="invisible"/>
+
+        <!-- Caller Name (EXTRA_CALLKEEP_CALLER_NAME) default is Unknown -->
         <TextView
             android:id="@+id/tvCallerName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Förnamn Efternamn"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:textColor="@android:color/white" />
+            android:text="@string/caller_name"
+            android:textSize="26sp"
+            android:textColor="@android:color/white"/>
 
+        <!-- CallerHeader (EXTRA_CALLKEEP_CONTENT_TITLE) -->
         <TextView
             android:id="@+id/tvCallHeader"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="@string/call_header"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
-            android:textColor="@android:color/white" />
+            android:text="@string/content_title"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"/>
+
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="wrap_content"
+    <!-- Accept / Decline Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo"
-        android:visibility="invisible"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-
-    <Button
-        android:id="@+id/btnAnswer"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:background="@drawable/answer_background"
-        android:drawableTop="@drawable/ic_accept"
-        android:paddingTop="10dp"
-        android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/accept_text"
-        android:textColor="#fff"
-        />
+        android:layout_marginBottom="70dp"
+        android:weightSum="2">
 
-    <Button
-        android:id="@+id/btnDecline"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:background="@drawable/decline_background"
-        android:drawableTop="@drawable/ic_decline"
-        android:paddingTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="45dp"
-        android:text="@string/decline_text"
-        android:textColor="#fff"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="60dp"
-        />
+        <!-- Decline button column -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="60dp">
+
+            <ImageButton
+                android:id="@+id/btnDecline"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/decline_background"
+                android:src="@drawable/ic_decline"
+                android:scaleType="fitCenter"
+                android:contentDescription="Decline"
+                android:padding="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decline"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Accept button column -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginStart="60dp">
+
+            <ImageButton
+                android:id="@+id/btnAnswer"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/answer_background"
+                android:src="@drawable/ic_accept"
+                android:scaleType="fitCenter"
+                android:contentDescription="Accept"
+                android:padding="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>
