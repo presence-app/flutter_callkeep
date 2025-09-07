@@ -7,6 +7,9 @@ Web is supported but user must build their own incoming call UI in Flutter, see 
 
 flutter_callkeep requires the following permissions.
 
+# Doc for UI Customization
+https://www.notion.so/presence-docs/Flutter-CallKeep-Plugin-UI-Customization-2679f8e0d48980728273d6682e344dc8?showMoveTo=true&saveParent=true
+
 ## Android 
 
 in AndroidManifest.xml, set launchMode to singleInstance for our main activity.
