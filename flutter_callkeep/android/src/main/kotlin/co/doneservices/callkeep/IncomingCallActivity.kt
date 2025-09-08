@@ -54,7 +54,6 @@ import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
-
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 
@@ -154,7 +153,10 @@ class IncomingCallActivity : Activity() {
 
     private fun updateViewWithIncomingIntentData(intent: Intent) {
         val data = intent.extras?.getBundle(EXTRA_CALLKEEP_INCOMING_DATA)
-        if (data == null) finish()
+        if (data == null) {
+            finish()
+            return
+        }
 
         // Set CallerName (eg John Doe) and CallHeader (eg, Incoming Call)
         // from EXTRA_CALLKEEP_CALLER_NAME and EXTRA_CALLKEEP_CONTENT_TITLE
@@ -162,18 +164,20 @@ class IncomingCallActivity : Activity() {
         tvCallHeader.text = data?.getString(EXTRA_CALLKEEP_CONTENT_TITLE, "")
 
         // Set avatarUrl from EXTRA_CALLKEEP_AVATAR
-        val avatarUrl = data?.getString(EXTRA_CALLKEEP_AVATAR)
-        val avatarDrawable = if (!avatarUrl.isNullOrEmpty()) {
-            avatarUrl
-        } else {
-            null
-        }
+        val avatarUrl = data.getString(EXTRA_CALLKEEP_AVATAR, "")
 
-        // If avatarUrl is not available, display default ic_default_avatar
-        ivLogo.visibility = View.VISIBLE
-        if (avatarDrawable != null) {
-            Picasso.get().load(avatarDrawable).into(ivLogo)
+        ivLogo.visibility = View.VISIBLE // Make sure it's visible before Picasso loads
+
+        if (!avatarUrl.isNullOrEmpty()) {
+            Picasso.get().load(avatarUrl).fetch() // fetch to downalod anc cache
+            ivLogo.post {
+                Picasso.get().load(avatarUrl)
+                    .placeholder(R.drawable.ic_default_avatar)
+                    .error(R.drawable.ic_default_avatar)
+                    .into(ivLogo)
+            }
         } else {
+            // If avatarUrl is not available, display default ic_default_avatar
             ivLogo.setImageResource(R.drawable.ic_default_avatar)
         }
 
