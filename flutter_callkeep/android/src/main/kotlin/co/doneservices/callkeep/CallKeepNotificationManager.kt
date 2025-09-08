@@ -141,6 +141,7 @@ class CallKeepNotificationManager(private val context: Context) {
 
         val avatarUrl = data.getString(EXTRA_CALLKEEP_AVATAR, "")
         if (avatarUrl != null && avatarUrl.isNotEmpty()) {
+            Picasso.get().load(avatarUrl).fetch() // Precache the image with Picasso, so it will be displayed instantly in IncomingCallActivity
             val headers =
                     data.getSerializable(CallKeepBroadcastReceiver.EXTRA_CALLKEEP_HEADERS) as HashMap<String, Any?>
             getPicassoInstance(context, headers).load(avatarUrl)
@@ -218,6 +219,8 @@ class CallKeepNotificationManager(private val context: Context) {
         if (avatarUrl != null && avatarUrl.isNotEmpty()) {
             val headers =
                     data.getSerializable(CallKeepBroadcastReceiver.EXTRA_CALLKEEP_HEADERS) as HashMap<String, Any?>
+
+            Picasso.get().load(avatarUrl).fetch() // Precache the image with Picasso, so it will be displayed instantly in IncomingCallActivity
 
             getPicassoInstance(context, headers).load(avatarUrl)
                     .into(targetLoadAvatarDefault)

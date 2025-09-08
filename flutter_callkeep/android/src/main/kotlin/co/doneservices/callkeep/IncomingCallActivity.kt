@@ -169,7 +169,7 @@ class IncomingCallActivity : Activity() {
         ivLogo.visibility = View.VISIBLE // Make sure it's visible before Picasso loads
 
         if (!avatarUrl.isNullOrEmpty()) {
-            Picasso.get().load(avatarUrl).fetch() // fetch to downalod anc cache
+            Picasso.get().load(avatarUrl).fetch() // Pre-cache image with Picasso
             ivLogo.post {
                 Picasso.get().load(avatarUrl)
                     .placeholder(R.drawable.ic_default_avatar)
