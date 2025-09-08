@@ -47,7 +47,16 @@ import android.os.PowerManager.WakeLock
 import android.text.TextUtils
 import co.doneservices.callkeep.CallKeepBroadcastReceiver.Companion.EXTRA_CALLKEEP_ACCEPT_TEXT
 import co.doneservices.callkeep.CallKeepBroadcastReceiver.Companion.EXTRA_CALLKEEP_DECLINE_TEXT
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.LinearGradient
+import android.graphics.Paint
+import android.graphics.PixelFormat
+import android.graphics.Shader
+import android.graphics.drawable.Drawable
 
+import android.graphics.drawable.GradientDrawable
+import androidx.appcompat.app.AppCompatActivity
 
 class IncomingCallActivity : Activity() {
 
@@ -174,13 +183,26 @@ class IncomingCallActivity : Activity() {
         applyGradientBackground() // Apply background gradient color
     }
 
-    // Set background gradient blue color
+    // Set background gradient (-45 degree) blue color
     private fun applyGradientBackground() {
-        val colors = intArrayOf(Color.parseColor("#456D91"), Color.parseColor("#2A5379"))
-        val gradient = android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colors)
-        gradient.cornerRadius = 0f
-        llBackground.background = gradient
+        val topGradient = 0xFF6785D9.toInt() // 0xFF6785D9
+        val midGradient = 0xFF6E85D9.toInt() // 0xFF6E85D9
+        val bottomGradient = 0xFF9779C7.toInt() // 0xFF9779C7
+
+        // Create a 45-degree gradient (Top-Left → Bottom-Right)
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.TL_BR, // diagonal: top-left to bottom-right
+            intArrayOf(topGradient, midGradient, bottomGradient)
+           // intArrayOf(topGradient, bottomGradient)
+        )
+
+        gradientDrawable.gradientType = GradientDrawable.LINEAR_GRADIENT
+        gradientDrawable.cornerRadius = 0f
+
+        llBackground.background = gradientDrawable
     }
+
+
 
     private fun finishTimeout(data: Bundle?, duration: Long) {
         val currentSystemTime = System.currentTimeMillis()
