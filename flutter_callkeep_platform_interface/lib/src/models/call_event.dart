@@ -16,6 +16,9 @@ class CallEvent extends CallKeepBaseEvent {
   /// Incoming/Outgoing call display time (in seconds). If the time is over, the call will be missed.
   final double duration;
 
+  /// The remote image of caller's avatar
+  final String? avatar;
+
   /// Any data added to the event when received.
   final Map<String, dynamic>? extra;
 
@@ -26,6 +29,7 @@ class CallEvent extends CallKeepBaseEvent {
     required super.uuid,
     this.callerName,
     this.handle,
+    this.avatar,
     this.hasVideo = false,
     this.isAccepted = false,
     this.duration = 180,
@@ -37,6 +41,7 @@ class CallEvent extends CallKeepBaseEvent {
       uuid: map['id'] ?? '',
       callerName: map['callerName'],
       handle: map['handle'],
+      avatar: map['avatar'],
       hasVideo: map['hasVideo'] ?? false,
       duration: map['duration']?.toDouble() ?? 180.0,
       isAccepted: map['isAccepted'] ?? false,
@@ -49,6 +54,7 @@ class CallEvent extends CallKeepBaseEvent {
       'id': uuid,
       'callerName': callerName,
       'handle': handle,
+      'avatar': avatar,
       'hasVideo': hasVideo,
       'duration': duration,
       'isAccepted': isAccepted,
@@ -59,6 +65,7 @@ class CallEvent extends CallKeepBaseEvent {
   CallEvent copyWith({
     String? callerName,
     String? handle,
+    String? avatar,
     bool? hasVideo,
     bool? isAccepted,
     double? duration,
@@ -68,6 +75,7 @@ class CallEvent extends CallKeepBaseEvent {
       uuid: uuid,
       callerName: callerName ?? this.callerName,
       handle: handle ?? this.handle,
+      avatar: avatar ?? this.avatar,
       hasVideo: hasVideo ?? this.hasVideo,
       isAccepted: isAccepted ?? this.isAccepted,
       duration: duration ?? this.duration,
@@ -77,6 +85,6 @@ class CallEvent extends CallKeepBaseEvent {
 
   @override
   String toString() {
-    return 'CallEvent(uuid: $uuid, callerName: $callerName, handle: $handle, hasVideo: $hasVideo, duration: $duration, extra: $extra, isAccepted: $isAccepted)';
+    return 'CallEvent(uuid: $uuid, callerName: $callerName, handle: $handle, avatar: $avatar, hasVideo: $hasVideo, duration: $duration, extra: $extra, isAccepted: $isAccepted)';
   }
 }
