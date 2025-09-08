@@ -159,6 +159,13 @@ void configureCallkeep() {
 ```
 
 ## Display incoming call: 
+Displays an incoming call screen using CallKeep.
+Create a `CallEvent` with the provided parameters and send it
+to the native CallKeep implementation. 
+The `extra` map is used to pass additional data.
+- 'avatar' is a default extra field to display the caller avatar's image url
+- Other custom fields can be passed at need.
+  
 ```
 final data = CallEvent(
   uuid: uuid,
@@ -166,7 +173,7 @@ final data = CallEvent(
   handle: '0123456789',
   hasVideo: false,
   duration: 30000,
-  extra: <String, dynamic>{'userId': '1a2b3c4d'},
+  extra: {'avatar': avatarUrl}, // Pass any other custom data
 );
 
 await CallKeep.instance.displayIncomingCall(data);
